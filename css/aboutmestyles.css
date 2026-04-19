@@ -1,0 +1,48 @@
+
+
+body {
+    font-family: "Times New Roman", Times, serif;
+    color: black;
+}
+
+#sidebar {
+    width: 150px;
+    height: 100%;
+    background-color: #34b8b8; /* Cyan */
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    border-right: 3px dashed black;
+}
+
+#main-stuff {
+    margin-left: 180px;
+    padding: 20px;
+}
+
+a:link {
+    color: #000000;
+}
+
+a:visited {
+    color: #800080;
+}
+
+a:hover {
+    color: red;
+    background-color: yellow;
+}
+
+img {
+    width: 100px;
+}
+
+table {
+    border-color: green;
+}
+.home-button{
+    padding: 0%;
+    background-color: gray;
+    color: black;
+}

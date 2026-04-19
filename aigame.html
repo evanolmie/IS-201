@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Volleyball Career Simulator</title>
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --dark: #2d3436;
+            --light: #f7f1e3;
+            --court-blue: #0984e3;
+            --court-orange: #e17055;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #353b48;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 500px;
+            width: 100%;
+            border-top: 5px solid var(--primary);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--light);
+            margin-top: 0;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            background-color: #2f3640;
+            color: white;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        input:focus {
+            outline: 2px solid var(--primary);
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .primary-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.3s, transform 0.1s;
+            width: 100%;
+        }
+
+        .primary-btn:hover {
+            background-color: #ff5252;
+        }
+
+        .primary-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Updated Back Button Styling for <a> tag */
+        .back-btn {
+            background-color: transparent;
+            color: #aaa;
+            border: 2px solid #555;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .back-btn:hover {
+            background-color: #555;
+            color: #fff;
+            border-color: #777;
+        }
+
+        /* Results Card Styling */
+        #results {
+            display: none;
+            margin-top: 30px;
+            background-color: #2f3640;
+            padding: 20px;
+            border-radius: 8px;
+            animation: slideUp 0.5s ease-out;
+            border-left: 4px solid var(--secondary);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .player-header {
+            border-bottom: 1px solid #555;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .player-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--secondary);
+            margin: 0;
+        }
+
+        .position {
+            font-size: 14px;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .stat-line {
+            margin: 10px 0;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        .stat-label {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .money {
+            font-size: 20px;
+            color: #2ecc71;
+            font-weight: bold;
+            margin-top: 15px;
+            text-align: center;
+            background: rgba(46, 204, 113, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        /* Attribute Bars */
+        .attributes {
+            margin-top: 20px;
+        }
+        
+        .attr-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .attr-name {
+            width: 80px;
+            color: #ccc;
+        }
+
+        .attr-bar-bg {
+            flex-grow: 1;
+            background-color: #1e272e;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .attr-bar-fill {
+            height: 100%;
+            background-color: var(--secondary);
+            width: 0%; /* Will be animated */
+            transition: width 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Pro Volley Sim</h1>
+        <div class="subtitle">Draft your legacy on the hardwood.</div>
+
+        <div class="input-group">
+            <input type="text" id="playerName" placeholder="Enter your full name..." autocomplete="off">
+        </div>
+        
+        <div class="btn-group">
+            <button class="primary-btn" onclick="simulateCareer()">Simulate Career</button>
+            
+            <a href="/volleyball.html" class="back-btn">Go back to basics</a>
+        </div>
+
+        <div id="results">
+            <div class="player-header">
+                <h2 class="player-name" id="out-name">Player Name</h2>
+                <div class="position" id="out-position">Position</div>
+            </div>
+
+            <div class="stat-line">
+                <span class="stat-label">🎓 College:</span> <span id="out-college">University</span>
+            </div>
+            <div class="stat-line">
+                <span class="stat-label">✈️ Pro Teams:</span> <span id="out-teams">Team A, Team B</span>
+            </div>
+            <div class="stat-line">
+                <span class="stat-label">🏆 Accolades:</span> <span id="out-accolades">Trophies</span>
+            </div>
+            
+            <div class="money">
+                Career Earnings: <span id="out-money">$0</span>
+            </div>
+
+            <div class="attributes">
+                <div class="attr-row">
+                    <span class="attr-name">Spike/Power</span>
+                    <div class="attr-bar-bg"><div class="attr-bar-fill" id="bar-power"></div></div>
+                </div>
+                <div class="attr-row">
+                    <span class="attr-name">Defense</span>
+                    <div class="attr-bar-bg"><div class="attr-bar-fill" id="bar-defense"></div></div>
+                </div>
+                <div class="attr-row">
+                    <span class="attr-name">Volleyball IQ</span>
+                    <div class="attr-bar-bg"><div class="attr-bar-fill" id="bar-iq"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data arrays for the simulator
+        const positions = ["Outside Hitter", "Opposite Hitter", "Setter", "Middle Blocker", "Libero"];
+        
+        const colleges = [
+            "Penn State", "Nebraska", "Texas", "Stanford", "Wisconsin", 
+            "Hawaii", "UCLA", "Long Beach State", "BYU", "Florida"
+        ];
+
+        const proTeams = [
+            "VakıfBank S.K. (Turkey)", "Imoco Volley Conegliano (Italy)", 
+            "Vero Volley Milano (Italy)", "Sir Safety Perugia (Italy)", 
+            "Jastrzębski Węgiel (Poland)", "Suntory Sunbirds (Japan)", 
+            "Omaha Supernovas (USA)", "Eczacıbaşı Dynavit (Turkey)",
+            "Trentino Volley (Italy)", "Sada Cruzeiro (Brazil)"
+        ];
+
+        const accoladesList = [
+            "Olympic Gold Medalist 🥇", "VNL MVP 🌟", "Champions League Winner 🏆", 
+            "NCAA National Champion 💍", "4x All-American ⭐", "Best Spiker Award 🏐",
+            "Best Setter Award 🎯", "Best Libero Award 🛡️", "Olympic Bronze Medalist 🥉",
+            "Inducted into Volleyball Hall of Fame 🏛️"
+        ];
+
+        // Helper function to get random items from an array
+        function getRandomItem(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        // Helper function to get multiple unique items
+        function getMultipleRandom(arr, num) {
+            const shuffled = [...arr].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, num);
+        }
+
+        function simulateCareer() {
+            const nameInput = document.getElementById("playerName").value.trim();
+            
+            if (!nameInput) {
+                alert("Coach needs a name on the roster! Please enter your name.");
+                return;
+            }
+
+            // Generate random career details
+            const position = getRandomItem(positions);
+            const college = getRandomItem(colleges);
+            
+            // Pick 2-3 pro teams
+            const numTeams = Math.floor(Math.random() * 2) + 2; 
+            const teams = getMultipleRandom(proTeams, numTeams).join(" ➔ ");
+
+            // Pick 2-4 accolades
+            const numAccolades = Math.floor(Math.random() * 3) + 2;
+            const accolades = getMultipleRandom(accoladesList, numAccolades).join(", ");
+
+            // Calculate earnings (Volleyball pros don't make NBA money, but top players do well!)
+            // Base money: $500k to $2.5M. Plus bonus for each accolade.
+            const baseEarnings = Math.floor(Math.random() * 2000000) + 500000;
+            const bonus = numAccolades * 750000; 
+            const totalMoney = baseEarnings + bonus;
+
+            // Format money to USD currency
+            const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 0
+            });
+
+            // Generate random stats (40 to 99)
+            // If Libero, defense is higher. If Hitter, power is higher.
+            let power = Math.floor(Math.random() * 59) + 40;
+            let defense = Math.floor(Math.random() * 59) + 40;
+            let iq = Math.floor(Math.random() * 49) + 50; // IQ is always decent
+
+            if (position === "Libero") { defense = Math.floor(Math.random() * 15) + 85; power = Math.floor(Math.random() * 30) + 30; }
+            if (position.includes("Hitter")) { power = Math.floor(Math.random() * 15) + 85; }
+            if (position === "Setter") { iq = Math.floor(Math.random() * 10) + 90; }
+
+            // Update the DOM
+            document.getElementById("out-name").innerText = nameInput;
+            document.getElementById("out-position").innerText = position;
+            document.getElementById("out-college").innerText = college;
+            document.getElementById("out-teams").innerText = teams;
+            document.getElementById("out-accolades").innerText = accolades;
+            document.getElementById("out-money").innerText = formatter.format(totalMoney);
+
+            // Show results
+            document.getElementById("results").style.display = "block";
+
+            // Animate stat bars after a tiny delay so the CSS transition triggers
+            setTimeout(() => {
+                document.getElementById("bar-power").style.width = power + "%";
+                document.getElementById("bar-defense").style.width = defense + "%";
+                document.getElementById("bar-iq").style.width = iq + "%";
+            }, 50);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+.header-box{
+border: 2px rgb(0, 0, 0);
+margin: auto;
+border-radius: 10px;
+text-align: center;
+width: 25%;
+padding: 10px;
+background-color: black;
+transition: transform 0.3s ease;
+color: white;
+}
+.header-box:hover{
+    transform: scale(1.1);
+}
+.pass-box{
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+margin: auto;
+border: 2px rgb(133, 133, 255);
+border-radius: 10px;
+width: 95%;
+padding: 10px;
+background-color: lightgray;
+transition: transform .3s ease;
+}
+.pass-box:hover{
+    transform: scale(1.05);
+}
+.pass-box h2{
+    text-align: center;
+}
+.pass-box iframe{
+    display: block;
+    margin: auto;
+    margin-bottom: 5px;
+}
+.nav-box{
+    border: 2px, black;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+.nav-box a{
+    border: 5px grey;
+    background-color: grey;
+    border-radius: 10px;
+    padding: auto;
+    margin: 5px;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    font-size: small;
+    text-align: center;
+    width: 100%;
+    position: relative;
+}
+.nav-box a:hover{
+    transform: scale(1.1)
+}
+
+.home-button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: transform 0.3s ease;
+    margin: auto;
+    display: block;
+    block-size: 10px;
+}
+.home-button:hover{
+    transform: scale(1.1);
+}
+.home-button a{
+    color: black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-decoration: none;
+    font-size: x-large;
+}
+.volley-button{
+    text-align: center;
+    border: 2px lightgray;
+    background-color: lightgray;
+    margin: auto;
+    padding: auto;
+    width: 20%;
+    border-radius: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    transition: transform 0.3s ease;
+    font-size: xx-large;
+}
+.volley-button a{
+    color: black;
+    text-decoration: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+.volley-button:hover{
+    transform: scale(1.1);
+}
+.ngapeth{
+    text-align: center;
+}
